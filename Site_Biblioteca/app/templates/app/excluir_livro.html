@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excluir Livro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-danger">Excluir Livro</h1>
+        <p>Tem certeza de que deseja excluir o livro <strong>{{ livro.titulo }}</strong>?</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <!-- Corrigido: URL correta para a listagem de livros -->
+            <a href="{% url 'app:gerenciar_livros' %}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-danger">Excluir</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concluir Empréstimo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Concluir Empréstimo</h1>
+        <p>Deseja realmente concluir o empréstimo do livro <strong>{{ emprestimo.livro.titulo }}</strong> para o usuário <strong>{{ emprestimo.usuario.nome }}</strong>?</p>
+        <form method="post">
+            {% csrf_token %}
+            <a href="{% url 'app:registrar_emprestimos' %}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-success">Concluir Empréstimo</button>
+        </form>
+    </div>
+</body>
+</html>

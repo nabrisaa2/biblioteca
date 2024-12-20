@@ -1,0 +1,56 @@
+<!-- core/templates/core/registrar_emprestimos.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registrar Empréstimos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Registrar Empréstimos</h1>
+        <!-- Corrigido: adicionado o namespace 'app:' -->
+        <a href="{% url 'app:home' %}" class="btn btn-secondary mb-3">Voltar para Home</a>
+        
+        <!-- Formulário de Registro de Empréstimos -->
+        <h3>Registrar Novo Empréstimo</h3>
+        <form method="post" class="mb-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+        
+        <!-- Lista de Empréstimos -->
+        <h3>Lista de Empréstimos</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Usuário</th>
+                    <th>Livro</th>
+                    <th>Data Empréstimo</th>
+                    <th>Data Devolução</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emprestimo in emprestimos %}
+                <tr>
+                    <td>{{ emprestimo.usuario.nome }}</td>
+                    <td>{{ emprestimo.livro.titulo }}</td>
+                    <td>{{ emprestimo.data_emprestimo }}</td>
+                    <td>{{ emprestimo.data_devolucao }}</td>
+                    <td>{{ emprestimo.status }}</td>
+                    <td>
+                        <a href="{% url 'app:concluir_emprestimo' emprestimo.id %}" class="btn btn-sm btn-success">Concluir</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">Nenhum empréstimo registrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
